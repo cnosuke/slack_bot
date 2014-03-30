@@ -1,9 +1,9 @@
 require 'sinatra'
 require 'json'
 require './filter'
-SLACK_TOKEN = ENV['SLACK_TOKEN']
+SLACK_TOKENS = ENV['SLACK_TOKENS'].split(/\,/)
 
-puts "TOKEN: #{SLACK_TOKEN}"
+puts "TOKEN: #{SLACK_TOKENS}"
 
 before '/hooks' do
   unless token_valid?
@@ -17,7 +17,7 @@ before '/hooks' do
 end
 
 def token_valid?
-  params['token'] == SLACK_TOKEN
+  SLACK_TOKENS.include?(params['token'])
 end
 
 def comment_by_myself?
@@ -31,6 +31,7 @@ end
 post '/hooks' do
   response = filter.update(params).compact.first
   return 200 unless response
+  response.merge!({link_names: 1, parse: "full"})
   j = response.to_json
   puts j
   j
