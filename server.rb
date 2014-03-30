@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 require './filter'
 SLACK_TOKEN = ENV['SLACK_TOKEN']
 
@@ -19,7 +20,7 @@ end
 post '/hooks' do
   response = filter.update(params)
   return 200 unless response
-  response
+  response.to_json
 end
 
 def filter
