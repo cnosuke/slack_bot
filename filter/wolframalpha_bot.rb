@@ -16,17 +16,16 @@ class Wolframalpha
 
   def exec!
     doc = Nokogiri.parse(get_api)
-    di = doc.xpath('//pod').first
-    text = di.xpath('subpod/plaintext').inner_text,
-    image = (di.xpath('subpod/img') ? di.xpath('subpod/img').attr('src').value : nil)
+    text = doc.xpath('//pod').first(3).compact.map{|e| e.xpath('subpod/plaintext').inner_text }.join("\n")
+    #image = (di.xpath('subpod/img') ? di.xpath('subpod/img').attr('src').value : nil)
     @response = { 
-      text: (text.is_a?(String) ? text : text.first),
-      image: image
+      text: text,
+      #image: image
     }
   end
 
   def to_s
-    @response[:text] + "\n" + @response[:image]
+    @response[:text].size.zero? ? 'I don\'t know.' : @response[:text]
   end
 
   def get_api
