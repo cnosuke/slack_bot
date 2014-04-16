@@ -5,7 +5,7 @@ module Filter
   class CookpadBot
     def update(p)
       t = p['text']
-      return nil unless t =~ /^\:cookpad\ /
+       return nil unless t =~ /^\:recipe\ /
       query = t.split(/\s/)[1..-1].join(' ')
       { username: 'COOKPAD', text: "#{query}: #{COOKPAD_API+URI.encode(query)}" }
     end
