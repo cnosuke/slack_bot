@@ -5,7 +5,7 @@ module Filter
   class AmazonBot
     def update(p)
       t = p['text']
-      return nil unless t =~ /^\:amazon/
+      return nil unless t =~ /^\:amazon /
       query = t.split(/\s/)[1..-1].join(' ')
       { username: 'Amazon', text: "#{query}: #{AMAZON_API+URI.encode(query)}" }
     end

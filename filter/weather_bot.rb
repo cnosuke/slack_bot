@@ -4,7 +4,7 @@ require 'open-uri'
 module Filter
   class WeatherBot
     def update(p)
-      return nil unless p['text'] =~ /^\:weather/
+      return nil unless p['text'] =~ /^\:weather /
       {
         username: "Weather",
         text: forecast

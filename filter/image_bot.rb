@@ -4,7 +4,7 @@ module Filter
   class ImageBot
     def update(p)
       t = p['text']
-      return nil unless t =~ /^\:image/
+      return nil unless t =~ /^\:image /
       query = t.split(/\s/)[1..-1].join(' ')
       { username: 'image', text: "#{query}: #{get_image_url(query)}" }
     end

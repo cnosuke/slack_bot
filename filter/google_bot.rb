@@ -5,7 +5,7 @@ module Filter
   class GoogleBot
     def update(p)
       t = p['text']
-      return nil unless t =~ /^\:google/
+      return nil unless t =~ /^\:google /
       query = t.split(/\s/)[1..-1].join(' ')
       { username: 'Google', text: "#{query}: #{GOOGLE_API+URI.encode(query)}" }
     end
