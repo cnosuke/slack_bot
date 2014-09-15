@@ -26,11 +26,7 @@ module Filter
     def fetch_data
       return @fetched_data if @fetched_data
       sasuoni_data = open(SASUONI_DATA_URI).read
-      sasuoni_data = sasuoni_data.
-        match(/this.items = (.+?);/m)[1].
-        gsub(/(word|image|src):/, "'\\1':").
-        gsub("'", '"')
-      @fetched_data = JSON.parse(sasuoni_data)
+      @fetched_data = YAML.load(sasuoni_data)
     end
   end
 end
