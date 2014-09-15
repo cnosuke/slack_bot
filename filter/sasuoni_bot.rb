@@ -1,4 +1,4 @@
-require 'json'
+require 'YAML'
 require 'open-uri'
 module Filter
   class SasuoniBot
