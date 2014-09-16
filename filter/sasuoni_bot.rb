@@ -10,7 +10,7 @@ module Filter
       if t =~ /^\:sasuoni list/
         { username: 'sasuoni', text: fetch_data.map { |z| z["word"] }.uniq.sort.join(", ") }
       else
-        { username: 'sasuoni', text: find_sasuoni_by_keyword(t.split(/\ /).last)["image"] }
+        { username: 'sasuoni', text: find_sasuoni_by_keyword(t.split(/\ /).last)["image"] + "?#{Time.now.to_i}" }
       end
     end
 
